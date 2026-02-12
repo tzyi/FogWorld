@@ -27,11 +27,17 @@
 **Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
 **Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
+
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+*GATE: 必須通過 FogWorld 憲法所有原則（技術核心、樣式、Android 最佳化、檔案結構、代碼品質、功能模組、治理條款等），方可進入 Phase 0 研究。Phase 1 設計後需再次檢查。*
 
-[Gates determined based on constitution file]
+1. 僅允許 React Native（Expo）+ TypeScript + Functional Components
+2. 嚴格禁止 Inline Style，樣式集中管理
+3. 地圖功能必須整合 Google Map 並支援迷霧遮罩
+4. 必須有單元測試與 ESLint/Prettier 驗證
+5. 檔案結構、命名、權限、圖片、狀態管理等須依憲法規範
+6. 重大變更需修訂憲法並團隊共識
 
 ## Project Structure
 

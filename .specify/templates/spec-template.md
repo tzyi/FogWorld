@@ -5,7 +5,10 @@
 **Status**: Draft  
 **Input**: User description: "$ARGUMENTS"
 
+
 ## User Scenarios & Testing *(mandatory)*
+
+> 所有 User Story 必須可獨立測試，且設計、驗收、開發皆需符合 FogWorld 憲法（技術核心、樣式、Android 最佳化、檔案結構、代碼品質、功能模組、治理條款等）之原則。
 
 <!--
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.

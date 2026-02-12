@@ -3,7 +3,10 @@
 description: "Task list template for feature implementation"
 ---
 
+
 # Tasks: [FEATURE NAME]
+
+> 所有任務必須遵循 FogWorld 憲法（技術核心、樣式、Android 最佳化、檔案結構、代碼品質、功能模組、治理條款等）之原則。
 
 **Input**: Design documents from `/specs/[###-feature-name]/`
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
