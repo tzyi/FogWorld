@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, ScrollView } from 'react-native';
 import { Map, BarChart2, Cloud, Settings } from 'lucide-react-native';
 import { Screen } from '../../App';
 
@@ -18,7 +18,11 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeScreen, onNavigate }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.navContent}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.navContent}
+      >
         {navItems.map(item => {
           const Icon = item.icon;
           const isActive = activeScreen === item.id;
@@ -39,7 +43,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ activeScreen, onNavigate }) => {
             </TouchableOpacity>
           );
         })}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -57,6 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     paddingHorizontal: 8,
+    minWidth: '100%',
   },
   navItem: {
     flexDirection: 'column',

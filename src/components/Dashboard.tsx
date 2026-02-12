@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
   // T008: 定位按鈕
   locateButtonContainer: {
     position: 'absolute',
-    bottom: 205,
-    right: 12,
+    top: 60,
+    right: 16,
     zIndex: 20,
   },
   locateButton: {

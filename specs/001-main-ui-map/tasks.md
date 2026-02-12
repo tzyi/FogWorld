@@ -43,9 +43,9 @@
 ---
 
 ## Phase 5: [US3] 工具列與深色模式 UI 實作（P3）
-- [ ] T013 [P] [US3] 實作橫向捲動工具列（4 個圖示按鈕）於 src/components/BottomNav.tsx
-- [ ] T014 [P] [US3] 實作深色模式全域樣式於 src/styles/globals.css
-- [ ] T015 [P] [US3] 確認所有 UI 文字皆為繁體中文於 src/components/
+- [X] T013 [P] [US3] 實作橫向捲動工具列（4 個圖示按鈕）於 src/components/BottomNav.tsx
+- [X] T014 [P] [US3] 實作深色模式全域樣式於 src/styles/globals.css
+- [X] T015 [P] [US3] 確認所有 UI 文字皆為繁體中文於 src/components/
 
 ### User Story 3 Goal
 - 工具列 4 按鈕、深色主題、繁體中文，UI 完全符合參考設計
@@ -56,9 +56,9 @@
 ---
 
 ## Phase 6: [US4] 其他頁面 UI 實作（P1~P3）
-- [ ] T016 [P] [US1] 實作個人統計數據頁 UI 於 src/components/Statistics.tsx
-- [ ] T017 [P] [US1] 實作 GPX 雲端同步頁 UI 於 src/components/SyncPage.tsx
-- [ ] T018 [P] [US1] 實作設定頁 UI（匯入 GPX 按鈕）於 src/components/SettingsPage.tsx
+- [X] T016 [P] [US1] 實作個人統計數據頁 UI 於 src/components/Statistics.tsx
+- [X] T017 [P] [US1] 實作 GPX 雲端同步頁 UI 於 src/components/SyncPage.tsx
+- [X] T018 [P] [US1] 實作設定頁 UI（匯入 GPX 按鈕）於 src/components/SettingsPage.tsx
 
 ### User Story 4 Goal
 - 其餘 3 頁面 UI 完全符合參考設計
@@ -69,9 +69,9 @@
 ---
 
 ## Phase 7: Polish & Cross-Cutting
-- [ ] T019 全面比對 UI 參考程式碼，確保無任何差異
-- [ ] T020 檢查所有頁面於不同尺寸下自適應與無遮蔽
-- [ ] T021 檢查所有 UI 皆為繁體中文
+- [X] T019 全面比對 UI 參考程式碼，確保無任何差異
+- [X] T020 檢查所有頁面於不同尺寸下自適應與無遮蔽
+- [X] T021 檢查所有 UI 皆為繁體中文
 
 ---
 

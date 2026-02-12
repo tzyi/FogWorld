@@ -248,3 +248,7 @@ clarify
 ```
 /speckit.implement 請幫我時做Phase 1 到 Phase 4的任務，Phase 1 到 Phase 4的任務請參考docs\plan\tasks.md中的Phase 1 到 Phase 4的任務列表，總共12個任務。，不准問我要不要繼續，就一直做下去，直到完成這12個任務才可以停下來。
 ```
+
+```
+/speckit.implement 請幫我時做Phase 5 到 Phase 7的任務，Phase 5 到 Phase 7的任務請參考docs\plan\tasks.md中的Phase 5 到 Phase 7的任務列表，總共9個任務。，不准問我要不要繼續，就一直做下去，直到完成這9個任務才可以停下來。
+```
