@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: FogWorld MainMap API
+  version: 1.0.0
+paths:
+  /track:
+    post:
+      summary: 新增一筆定位軌跡
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Track'
+      responses:
+        '201':
+          description: Created
+  /grid:
+    get:
+      summary: 查詢可視範圍內所有網格狀態
+      parameters:
+        - in: query
+          name: bounds
+          schema:
+            type: string
+          description: 地圖可視範圍（格式: 'lat1,lng1,lat2,lng2'）
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Grid'
+  /stat:
+    get:
+      summary: 查詢統計資訊
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Stat'
+components:
+  schemas:
+    Track:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        lat:
+          type: number
+        lng:
+          type: number
+        grid_id:
+          type: string
+    Grid:
+      type: object
+      properties:
+        grid_id:
+          type: string
+        explored:
+          type: boolean
+        updated_at:
+          type: string
+          format: date-time
+    Stat:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: number

@@ -100,3 +100,14 @@
 - 預設用戶已授權定位權限。
 - 地圖服務可正常載入。
 - 迷霧遮罩預設以效能最佳、相容性高的方式實現。
+
+
+## UI設計
+UI設計的程式碼請參考 docs\ui\reference_ui_code 目錄下的檔案
+裡面有頁面的UI設計，請參考這些檔案的內容來實作UI。
+
+4個頁面的UI嚴格一定要跟下面這些檔案的內容一模一樣，不能有任何差異：
+1. 主地圖介面 (UI設計參考 docs\ui\main.png)
+2. 個人統計數據頁面 (UI設計參考 docs\ui\statistics.png)
+3. GPX 軌跡與遊玩紀錄雲端同步功能 (UI設計參考 docs\ui\save.png)
+4. 設定頁面 (UI設計參考 docs\ui\settings.png)
