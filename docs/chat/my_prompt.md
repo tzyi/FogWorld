@@ -237,3 +237,9 @@ clarify
 ```
 
 
+## tasks
+
+```
+/speckit.tasks 一開始的步驟請先完成4個頁面的UI實作，UI就好，功能先不實作，等UI完成後再來實作功能。並且UI部分嚴格按照spec.md中的UI設計來實作，不能有任何差異。UI完成後再來實作功能，功能的部分請參考spec.md中的Functional Requirements來實作。
+```
+
