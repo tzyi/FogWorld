@@ -243,3 +243,8 @@ clarify
 /speckit.tasks 一開始的步驟請先完成4個頁面的UI實作，UI就好，功能先不實作，等UI完成後再來實作功能。並且UI部分嚴格按照spec.md中的UI設計來實作，不能有任何差異。UI完成後再來實作功能，功能的部分請參考spec.md中的Functional Requirements來實作。
 ```
 
+## implement
+
+```
+/speckit.implement 請幫我時做Phase 1 到 Phase 4的任務，Phase 1 到 Phase 4的任務請參考docs\plan\tasks.md中的Phase 1 到 Phase 4的任務列表，總共12個任務。，不准問我要不要繼續，就一直做下去，直到完成這12個任務才可以停下來。
+```

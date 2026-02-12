@@ -5,22 +5,22 @@
 ---
 
 ## Phase 1: Setup
-- [ ] T001 建立專案目錄結構（src/components, src/hooks, src/services, src/utils, src/theme）
-- [ ] T002 安裝 UI 參考程式碼所需依賴（react, tailwindcss, lucide-react 等）
-- [ ] T003 初始化 Tailwind CSS 與全域樣式（src/styles/globals.css）
-- [ ] T004 設定 TypeScript 與 Prettier/ESLint 規範
+- [X] T001 建立專案目錄結構（src/components, src/hooks, src/services, src/utils, src/theme）
+- [X] T002 安裝 UI 參考程式碼所需依賴（react, tailwindcss, lucide-react 等）
+- [X] T003 初始化 Tailwind CSS 與全域樣式（src/styles/globals.css）
+- [X] T004 設定 TypeScript 與 Prettier/ESLint 規範
 
 ## Phase 2: Foundational
-- [ ] T005 建立 App 進入點與頁面切換邏輯於 src/App.tsx
-- [ ] T006 建立底部導覽元件於 src/components/BottomNav.tsx
+- [X] T005 建立 App 進入點與頁面切換邏輯於 src/App.tsx
+- [X] T006 建立底部導覽元件於 src/components/BottomNav.tsx
 
 ---
 
 ## Phase 3: [US1] 主地圖頁 UI 實作（P1）
-- [ ] T007 [P] [US1] 實作 Dashboard UI（全螢幕地圖、迷霧遮罩、藍點）於 src/components/Dashboard.tsx
-- [ ] T008 [P] [US1] 實作地圖上方定位按鈕於 src/components/Dashboard.tsx
-- [ ] T009 [P] [US1] 實作底部狀態欄（等級、探索比例、今日/累積里程）於 src/components/Dashboard.tsx
-- [ ] T010 [P] [US1] 實作紅色「開始探索」按鈕於 src/components/Dashboard.tsx
+- [X] T007 [P] [US1] 實作 Dashboard UI（全螢幕地圖、迷霧遮罩、藍點）於 src/components/Dashboard.tsx
+- [X] T008 [P] [US1] 實作地圖上方定位按鈕於 src/components/Dashboard.tsx
+- [X] T009 [P] [US1] 實作底部狀態欄（等級、探索比例、今日/累積里程）於 src/components/Dashboard.tsx
+- [X] T010 [P] [US1] 實作紅色「開始探索」按鈕於 src/components/Dashboard.tsx
 
 ### User Story 1 Goal
 - APP 啟動即顯示地圖、藍點、迷霧遮罩，UI 完全符合參考設計
@@ -31,8 +31,8 @@
 ---
 
 ## Phase 4: [US2] 狀態欄與探索按鈕 UI 實作（P2）
-- [ ] T011 [P] [US2] 實作狀態欄資訊顯示（等級、探索比例、里程）於 src/components/Dashboard.tsx
-- [ ] T012 [P] [US2] 實作紅色「開始/停止探索」按鈕切換樣式於 src/components/Dashboard.tsx
+- [X] T011 [P] [US2] 實作狀態欄資訊顯示（等級、探索比例、里程）於 src/components/Dashboard.tsx
+- [X] T012 [P] [US2] 實作紅色「開始/停止探索」按鈕切換樣式於 src/components/Dashboard.tsx
 
 ### User Story 2 Goal
 - 狀態欄與探索按鈕互動樣式正確，UI 完全符合參考設計

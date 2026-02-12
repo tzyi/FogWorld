@@ -1,20 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import MapView from 'react-native-maps'; // 1. 匯入地圖組件
+import { StatusBar } from 'expo-status-bar';
+import Dashboard from './src/components/Dashboard';
+import Statistics from './src/components/Statistics';
+import SyncPage from './src/components/SyncPage';
+import SettingsPage from './src/components/SettingsPage';
+import BottomNav from './src/components/BottomNav';
+
+export type Screen = 'map' | 'stats' | 'sync' | 'settings';
 
 export default function App() {
+  const [activeScreen, setActiveScreen] = useState<Screen>('map');
+
+  const renderScreen = () => {
+    switch (activeScreen) {
+      case 'map':
+        return <Dashboard />;
+      case 'stats':
+        return <Statistics />;
+      case 'sync':
+        return <SyncPage />;
+      case 'settings':
+        return <SettingsPage />;
+      default:
+        return <Dashboard />;
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        provider="google"
-        initialRegion={{
-          latitude: 25.0330,
-          longitude: 121.5654,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
-        }}
-      />
+      <StatusBar style="light" />
+      {/* 主內容區域 */}
+      <View style={styles.content}>{renderScreen()}</View>
+      {/* 底部導覽列 */}
+      <BottomNav activeScreen={activeScreen} onNavigate={setActiveScreen} />
     </View>
   );
 }
@@ -22,9 +41,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000000',
   },
-  map: {
-    width: '100%',
-    height: '100%',
+  content: {
+    flex: 1,
   },
 });
