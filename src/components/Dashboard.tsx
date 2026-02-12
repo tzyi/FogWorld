@@ -161,10 +161,10 @@ const styles = StyleSheet.create({
   // T009: 底部狀態欄
   statsOverlay: {
     position: 'absolute',
-    bottom: 16,
-    left: 16,
-    right: 16,
-    zIndex: 20,
+    bottom: 6,
+    left: 6,
+    right: 6,
+    zIndex: 10,
   },
   statsCard: {
     backgroundColor: 'rgba(26, 26, 26, 0.95)',
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 16,
+    gap: 6,
   },
   statItem: {
     width: '48%',
