@@ -147,7 +147,11 @@ Https://fogofworld.app/zh-hant/
 ```
 
 
-
+## specify
+- 依據上面創建UI的提示詞與圖片，來產生ref_specify.md
+```
+/speckit.specify 請參考 ref_specify.md
+```
 
 
 
