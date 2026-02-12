@@ -221,20 +221,21 @@ const styles = StyleSheet.create({
   },
   exploreButton: {
     width: '100%',
-    paddingVertical: 16,
+    paddingVertical: 10,
     borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
+    borderWidth: 2
   },
   exploreButtonInactive: {
     backgroundColor: '#DC2626',
     shadowColor: '#DC2626',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
     shadowRadius: 15,
-    elevation: 5,
+    // elevation: 5,
   },
   exploreButtonActive: {
     backgroundColor: 'rgba(220, 38, 38, 0.2)',
@@ -244,7 +245,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.3,
     shadowRadius: 15,
-    elevation: 3,
+    // elevation: 3,
   },
   buttonDot: {
     width: 12,
