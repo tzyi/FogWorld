@@ -72,22 +72,25 @@ description: "Task list for 002-fog-mask: 迷霧遮罩渲染與探索"
 
 ## Phase N: Polish & Cross-Cutting Concerns
 
-- [ ] T022 [P] 文件補充與 API 合約同步於 docs/002-fog-mask/
-- [ ] T023 代碼重構與效能優化（細化：針對地圖互動效能 <100ms、60fps，優化渲染與狀態管理）
-- [ ] T024 [P] 補充單元測試於 tests/features/fogmask/（補齊所有元件：ExploreButton, MainMapPage, useFogMask, useTrackRecorder, useErrorHandler 等）
-- [ ] T025 安全性強化與權限驗證（明確驗收：權限異常時 100% 彈出提示並禁止探索）
-- [ ] T026 執行 quickstart.md 驗證
-- [ ] T027 [P] SQLite 索引查詢效能優化與測試於 src/features/fogmask/services/storage.ts、tests/features/fogmask/Storage.test.ts
-- [ ] T028 [P] 跨平台（Android/iOS）效能與相容性測試，確保 95% 以上裝置不卡頓、顯示正常
-- [ ] T029 [P] 地圖資料載入失敗處理與測試於 src/features/fogmask/hooks/useErrorHandler.ts、tests/features/fogmask/ErrorHandler.test.ts
+- [ ] T022 [P] 文件補充與 API 合約同步於 docs/002-fog-mask/（須包含所有資料實體、API、異常處理、邊界情境說明）
+- [ ] T023 代碼重構與效能優化（細化：針對地圖互動效能 <100ms、60fps，優化渲染與狀態管理，重構重複邏輯，統一命名）
+- [ ] T024 [P] 補充單元測試於 tests/features/fogmask/（補齊所有元件：ExploreButton, MainMapPage, useFogMask, useTrackRecorder, useErrorHandler 等，並覆蓋所有邊界情境）
+- [ ] T025 安全性強化與權限驗證（明確驗收：權限異常時 100% 彈出提示並禁止探索，測試權限異常與資料異常情境）
+- [ ] T026 執行 quickstart.md 驗證（須依據 spec.md 之可衡量成果逐項驗證）
+- [ ] T027 [P] SQLite 索引查詢效能優化與測試於 src/features/fogmask/services/storage.ts、tests/features/fogmask/Storage.test.ts（查詢延遲 <50ms，異常資料測試）
+- [ ] T028 [P] 跨平台（Android/iOS）效能與相容性測試，確保 95% 以上裝置不卡頓、顯示正常，並覆蓋不同螢幕尺寸、深色模式
+- [ ] T029 [P] 地圖資料載入失敗處理與測試於 src/features/fogmask/hooks/useErrorHandler.ts、tests/features/fogmask/ErrorHandler.test.ts（100% 覆蓋載入失敗、API 錯誤、資料異常等情境）
+- [ ] T030 [P] 邊界情境測試：定位失敗、未授權、地圖資料異常、經緯度超出範圍等於 tests/features/fogmask/BoundaryCases.test.tsx
 
 ---
+
 
 ## Dependencies & Execution Order
 
 - Phase 1 → Phase 2 → 各 User Story（P1→P2→P3）可獨立測試
 - 各 [P] 任務可平行進行（不同檔案、無依賴）
 - 每個 User Story 完成後可單獨驗證
+- 所有驗收標準、命名、資料實體、技術規範皆以 spec.md 與 .specify/memory/constitution.md 為唯一依據，避免用詞漂移。
 
 ## Parallel Example
 - T003、T004、T005、T006、T007、T008 可同時進行
