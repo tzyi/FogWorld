@@ -1,14 +1,57 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, PermissionsAndroid, Platform } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
 import { LocateFixed } from 'lucide-react-native';
+import Geolocation from 'react-native-geolocation-service';
 
 const Dashboard: React.FC = () => {
   const [isExploring, setIsExploring] = useState(false);
+  // region 狀態化
+  const [region, setRegion] = useState<Region>({
+    latitude: 25.033,
+    longitude: 121.5654,
+    latitudeDelta: 0.05,
+    longitudeDelta: 0.05,
+  });
+  // loading 與錯誤狀態
+  const [locating, setLocating] = useState(false);
+  const [locateError, setLocateError] = useState<string | null>(null);
 
-  const handleLocate = () => {
-    // 實際應用中，這會使用地理定位來置中地圖
-    console.log('定位使用者中...');
+  // 權限請求
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+    return true;
+  };
+
+  const handleLocate = async () => {
+    setLocating(true);
+    setLocateError(null);
+    const hasPermission = await requestLocationPermission();
+    if (!hasPermission) {
+      Alert.alert('定位失敗', '未取得定位權限', [{ text: '確定' }]);
+      setLocating(false);
+      return;
+    }
+    Geolocation.getCurrentPosition(
+      (pos) => {
+        setRegion((prev) => ({
+          ...prev,
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        }));
+        setLocating(false);
+      },
+      (err) => {
+        Alert.alert('定位失敗', '定位失敗，請確認權限已開啟', [{ text: '確定' }]);
+        setLocating(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
+    );
   };
 
   return (
@@ -17,12 +60,8 @@ const Dashboard: React.FC = () => {
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
-        initialRegion={{
-          latitude: 25.033,
-          longitude: 121.5654,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
-        }}
+        region={region}
+        onRegionChangeComplete={setRegion}
       />
 
       {/* 迷霧遮罩效果 */}
@@ -34,9 +73,17 @@ const Dashboard: React.FC = () => {
           onPress={handleLocate}
           style={styles.locateButton}
           activeOpacity={0.95}
+          disabled={locating}
         >
-          <LocateFixed size={24} color="#60A5FA" />
+          {locating ? (
+            <Text style={{ color: '#60A5FA', fontSize: 16 }}>...</Text>
+          ) : (
+            <LocateFixed size={24} color="#60A5FA" />
+          )}
         </TouchableOpacity>
+        {locateError && (
+          <Text style={{ color: '#EF4444', fontSize: 12, marginTop: 4 }}>{locateError}</Text>
+        )}
       </View>
 
       {/* T007: 使用者位置藍點 */}
