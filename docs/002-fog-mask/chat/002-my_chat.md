@@ -51,3 +51,8 @@ plan
 ```
 
 
+# implement
+
+```
+/speckit.implement 任務請參考docs\plan\tasks.md中的任務列表，總共30個任務。，不准問我要不要繼續，就一直做下去，直到完成這30個任務才可以停下來。
+```

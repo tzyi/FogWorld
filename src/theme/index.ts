@@ -70,3 +70,31 @@ export const fontWeight = {
   semibold: '600' as const,
   bold: '700' as const,
 };
+
+// FogMask 功能專用主題
+export const fogMaskTheme = {
+  fog: {
+    color: 'rgba(0, 0, 0, 0.7)', // 迷霧顏色（深色半透明）
+    exploredColor: 'rgba(0, 0, 0, 0)', // 已探索區域（完全透明）
+  },
+  explore: {
+    buttonBgActive: '#4CAF50', // 探索中按鈕背景色
+    buttonBgInactive: '#757575', // 未探索按鈕背景色
+    buttonText: '#FFFFFF', // 按鈕文字顏色
+  },
+  stats: {
+    cardBg: 'rgba(255, 255, 255, 0.95)', // 統計卡片背景（深色模式下調整）
+    cardBgDark: 'rgba(37, 37, 37, 0.95)', // 深色模式統計卡片背景
+    textPrimary: '#252525', // 主要文字顏色
+    textPrimaryDark: '#FAFAFA', // 深色模式主要文字顏色
+    textSecondary: '#717182', // 次要文字顏色
+    textSecondaryDark: '#B5B5B5', // 深色模式次要文字顏色
+    progressBar: '#4CAF50', // 進度條顏色
+    progressBarBg: '#E0E0E0', // 進度條背景色
+  },
+  map: {
+    markerColor: '#2196F3', // 當前位置標記顏色（藍點）
+    trackColor: '#FF5722', // 軌跡顏色
+    gridSize: 100, // 網格大小（米）
+  },
+};
