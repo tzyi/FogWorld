@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Region, Marker } from 'react-native-maps';
 import { LocateFixed } from 'lucide-react-native';
 import * as Location from 'expo-location';
 
@@ -13,6 +13,11 @@ const Dashboard: React.FC = () => {
     latitudeDelta: 0.05,
     longitudeDelta: 0.05,
   });
+  // 使用者實際位置（獨立於地圖中心）
+  const [userLocation, setUserLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
   // loading 與錯誤狀態
   const [locating, setLocating] = useState(false);
   const [locateError, setLocateError] = useState<string | null>(null);
@@ -35,6 +40,13 @@ const Dashboard: React.FC = () => {
         accuracy: Location.Accuracy.High,
       });
 
+      // 更新使用者實際位置
+      setUserLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+
+      // 將地圖中心移動到使用者位置
       setRegion((prev) => ({
         ...prev,
         latitude: location.coords.latitude,
@@ -55,7 +67,19 @@ const Dashboard: React.FC = () => {
         style={styles.map}
         region={region}
         onRegionChangeComplete={setRegion}
-      />
+      >
+        {/* 使用者位置藍點 - 固定在實際地理位置 */}
+        {userLocation && (
+          <Marker
+            coordinate={{
+              latitude: userLocation.latitude,
+              longitude: userLocation.longitude,
+            }}
+          >
+            <View style={styles.blueDot} />
+          </Marker>
+        )}
+      </MapView>
 
       {/* 迷霧遮罩效果 */}
       <View style={styles.fogOverlay} pointerEvents="none" />
@@ -77,11 +101,6 @@ const Dashboard: React.FC = () => {
         {locateError && (
           <Text style={{ color: '#EF4444', fontSize: 12, marginTop: 4 }}>{locateError}</Text>
         )}
-      </View>
-
-      {/* T007: 使用者位置藍點 */}
-      <View style={styles.userLocationDot} pointerEvents="box-none">
-        <View style={styles.blueDot} />
       </View>
 
       {/* T009 & T010: 底部狀態欄 */}
