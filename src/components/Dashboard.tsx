@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   // 迷霧遮罩效果（T007）
   fogOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
   },
   // T008: 定位按鈕
   locateButtonContainer: {
