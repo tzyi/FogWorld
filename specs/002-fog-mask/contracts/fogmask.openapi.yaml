@@ -1,0 +1,157 @@
+openapi: 3.0.3
+info:
+  title: Fog Mask API
+  version: 0.1.0
+  description: |-
+    迷霧遮罩與探索軌跡功能 API，支援地圖遮罩、探索紀錄、統計查詢與 GPX 檔案管理。
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /fogmask:
+    get:
+      summary: 取得目前用戶的迷霧遮罩資料
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FogMask'
+    put:
+      summary: 更新迷霧遮罩資料
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FogMask'
+      responses:
+        '200':
+          description: 更新成功
+  /exploretrack:
+    get:
+      summary: 取得探索軌跡
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExploreTrack'
+    post:
+      summary: 新增探索軌跡
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExploreTrack'
+      responses:
+        '201':
+          description: 建立成功
+  /userstat:
+    get:
+      summary: 取得用戶統計資訊
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserStat'
+  /gpxfile:
+    get:
+      summary: 取得 GPX 檔案列表
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GPXFile'
+    post:
+      summary: 上傳 GPX 檔案
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: 上傳成功
+components:
+  schemas:
+    FogMask:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        mapGrid:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer
+        updatedAt:
+          type: string
+          format: date-time
+    ExploreTrack:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        points:
+          type: array
+          items:
+            type: object
+            properties:
+              lat:
+                type: number
+              lng:
+                type: number
+              timestamp:
+                type: integer
+        createdAt:
+          type: string
+          format: date-time
+    UserStat:
+      type: object
+      properties:
+        userId:
+          type: string
+        exploredArea:
+          type: number
+        exploredPercent:
+          type: number
+        level:
+          type: integer
+        updatedAt:
+          type: string
+          format: date-time
+    GPXFile:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        fileName:
+          type: string
+        uploadedAt:
+          type: string
+          format: date-time
+        localPath:
+          type: string
