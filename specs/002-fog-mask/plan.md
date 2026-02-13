@@ -8,7 +8,9 @@
 ## Summary
 
 [Extract from feature spec: primary requirement + technical approach from research]
-
+主要需求：地圖迷霧遮罩即時互動、探索軌跡紀錄、統計資訊顯示。
+技術路線：採用 React Native/Expo + TypeScript，地圖整合 Google Maps API，狀態管理用 Zustand，儲存採混合架構（本地 SQLite/AsyncStorage + 雲端 Firebase/Supabase），所有樣式集中管理，效能目標 60fps、渲染延遲 <100ms。
+所有技術釐清（如儲存方式）已於 research.md 完成，無 NEEDS CLARIFICATION。
 ## Technical Context
 
 <!--
@@ -17,22 +19,38 @@
   the iteration process.
 -->
 
-**Language/Version**: TypeScript (React Native, Expo)  
-**Primary Dependencies**: React Native, Expo, Google Maps API, Zustand（狀態管理，已確認），ESLint, Prettier, Jest（單元測試，100% 元件覆蓋）  
-**Storage**: 本地儲存（採用 @react-native-async-storage/async-storage），雲端同步（暫不納入本 feature）  
-**Testing**: Jest（單元測試，所有元件皆需覆蓋）、ESLint、Prettier  
-**Target Platform**: Android（優先）、iOS（次要，支援 95% 以上主流裝置）
-**Project Type**: mobile（feature-based 結構）  
-**Performance Goals**: 地圖互動 60fps、迷霧遮罩即時更新 <100ms、地圖載入 <2s（所有效能標準明確量化）  
-**Constraints**: 嚴禁 Inline Style、樣式集中管理、必須支援深色模式、Android 字體規範、權限嚴格遵循憲法、地圖功能必須整合 Google Map 並支援迷霧遮罩  
-**Scale/Scope**: 1 主地圖頁（MainMapPage）、1 統計頁、1 設定頁、1 GPX 頁，迷霧遮罩演算法與狀態管理須可擴展（支援 10,000+ 網格/軌跡）
-
+**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
+**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
+**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+**Project Type**: [single/web/mobile - determines source structure]  
+**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
+**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: TypeScript (React Native/Expo)
+**Primary Dependencies**: Expo, React Native, Google Maps API, Zustand (狀態管理)
+**Storage**: NEEDS CLARIFICATION（是否需本地/雲端儲存探索軌跡？）
+**Testing**: Jest, React Native Testing Library, ESLint, Prettier
+**Target Platform**: Android（優先）、iOS（次要）
+**Project Type**: Mobile（Feature-based 結構）
+**Performance Goals**: 60fps 互動、渲染延遲 <100ms、資料查詢 <50ms
+**Constraints**: 禁用 Inline Style，所有樣式集中管理，地圖整合 Google Map 並支援迷霧遮罩，需有單元測試與 ESLint/Prettier 驗證
+**Scale/Scope**: 1 地圖主頁、迷霧遮罩、探索軌跡紀錄、統計資訊（約 3-5 個主要畫面）
 
 ## Constitution Check
 
 *GATE: 必須通過 FogWorld 憲法所有原則（技術核心、樣式、Android 最佳化、檔案結構、代碼品質、功能模組、治理條款等），方可進入 Phase 0 研究。Phase 1 設計後需再次檢查。*
 
-> 本計畫所有技術、樣式、結構、品質、功能模組等規範，詳見 .specify/memory/constitution.md，僅於此引用，不重複全文。
+1. 僅允許 React Native（Expo）+ TypeScript + Functional Components
+2. 嚴格禁止 Inline Style，樣式集中管理
+3. 地圖功能必須整合 Google Map 並支援迷霧遮罩
+4. 必須有單元測試與 ESLint/Prettier 驗證
+5. 檔案結構、命名、權限、圖片、狀態管理等須依憲法規範
+6. 重大變更需修訂憲法並團隊共識
+
+---
+Phase 1 設計完成後檢查：所有資料模型、API 合約、技術選型、目錄結構、測試與樣式規範皆符合 FogWorld 憲法規範，無違規或需特別說明之處。
 
 ## Project Structure
 
@@ -92,7 +110,8 @@ ios/ or android/
 └── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**Structure Decision**: 採用 Option 1：單一 mobile 專案，feature-based 結構，主地圖頁命名統一為 MainMapPage，所有資料實體命名與 spec.md 一致。
+**Structure Decision**: [Document the selected structure and reference the real
+directories captured above]
 
 ## Complexity Tracking
 
@@ -100,16 +119,5 @@ ios/ or android/
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| 無         |            |                                     |
-
-## Unmapped/Polish Tasks Acceptance
-
-- 文件補充（T022）：須包含所有資料實體、API、異常處理、邊界情境說明。
-- 代碼重構與效能優化（T023）：須針對地圖互動效能 <100ms、60fps，優化渲染與狀態管理，重構重複邏輯，統一命名。
-- 單元測試補充（T024）：所有元件與邊界情境皆須有測試覆蓋。
-- 安全性強化（T025）：權限異常時 100% 彈出提示並禁止探索，測試權限異常與資料異常情境。
-- quickstart 驗證（T026）：須依據 spec.md 之可衡量成果逐項驗證。
-- SQLite 效能（T027）：查詢延遲 <50ms，異常資料測試。
-- 跨平台效能（T028）：95% 以上裝置不卡頓、顯示正常，並覆蓋不同螢幕尺寸、深色模式。
-- 地圖載入失敗處理（T029）：100% 覆蓋載入失敗、API 錯誤、資料異常等情境。
-- 邊界情境測試（T030）：定位失敗、未授權、地圖資料異常、經緯度超出範圍等皆須測試。
+| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |

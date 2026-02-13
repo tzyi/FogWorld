@@ -38,7 +38,28 @@
 決策：採用 AsyncStorage，暫不強制雲端同步。
 理由：AsyncStorage 易於整合 React Native，資料量小時效能足夠，雲端同步可後續擴充。
 替代方案：SecureStore（需敏感資料時）、雲端同步（如 Firebase，後續評估）。
+# 補充：混合儲存（本地 + 雲端同步）最佳實踐
 
+決策：採用混合儲存架構，探索軌跡先寫入本地資料庫（SQLite/AsyncStorage），每 5-10 秒批次同步至雲端（Firebase/Supabase）。
+理由：
+1. 本地儲存即時記錄探索軌跡，查詢延遲 <50ms，符合效能目標。
+2. 雲端同步備份軌跡，支援跨裝置資料恢復、進度保存。
+3. 離線支援，網路恢復後再同步雲端。
+4. 雲端資料防止遺失，支援多裝置切換。
+5. React Native/Expo 生態系對 SQLite、AsyncStorage、Firebase 等有完整支援。
+替代方案：
+1. 純本地儲存：效能佳、離線支援，但資料易遺失、無法跨裝置同步。
+2. 純雲端儲存：資料安全、可跨裝置，但需持續網路連線，離線時無法記錄軌跡。
+3. 混合儲存（推薦）：兼顧效能、離線支援、資料安全、跨裝置同步，需設計同步機制，複雜度略高。
+
+最佳實踐：
+- 採用混合儲存架構，先本地記錄，定期同步雲端。
+- 本地資料庫選擇 SQLite（expo-sqlite）或 AsyncStorage（@react-native-async-storage/async-storage）。
+- 雲端同步推薦 Firebase Firestore、Supabase 或 AWS Amplify。
+- 同步機制需考慮網路狀態、資料衝突與重試策略。
+- 資料加密與權限控管，保障用戶隱私與安全。
+
+結論：建議採用「混合儲存」方案，先本地記錄探索軌跡，定期同步至雲端，兼顧效能、離線支援、資料安全與跨裝置進度，完全解決 Technical Context 中 Storage 的 NEEDS CLARIFICATION。
 ### 4. iOS 支援範圍
 決策：以 Android 為主，iOS 保持基本相容（不影響主流程即可）。
 理由：專案主力為 Android，iOS 僅需確保不閃退、主功能可用。
