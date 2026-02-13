@@ -29,21 +29,25 @@ description: "Task list for 002-fog-mask: 迷霧遮罩渲染與探索"
 
 ## Phase 3: User Story 1 - 開啟探索模式並顯示迷霧遮罩 (P1)
 
-**Goal**: 使用者進入地圖後，按下「開始探索」顯示迷霧遮罩，並以藍點為中心開啟透明區域，隨移動即時更新
-**Independent Test**: 按下「開始探索」後，迷霧遮罩正確顯示，透明區域隨藍點移動即時更新
+**Goal**: 使用者進入主地圖頁（MainMapPage）後，按下「開始探索」顯示迷霧遮罩，並以藍點為中心開啟透明區域，隨移動即時更新
+**Independent Test**: 按下「開始探索」後，迷霧遮罩正確顯示，透明區域隨藍點移動即時更新，渲染延遲 <100ms，互動 60fps
 
 - [ ] T009 [P] [US1] 實作 FogMask 元件於 src/features/fogmask/components/FogMask.tsx
 - [ ] T010 [P] [US1] 實作探索啟動按鈕元件於 src/features/fogmask/components/ExploreButton.tsx
-- [ ] T011 [US1] 整合 Google Map 與 FogMask 顯示於主頁 src/features/fogmask/MainMapPage.tsx
+- [ ] T011 [US1] 整合 Google Map 與 FogMask 顯示於主地圖頁 src/features/fogmask/MainMapPage.tsx
 - [ ] T012 [US1] 實作透明區域即時更新邏輯於 src/features/fogmask/hooks/useFogMask.ts
 - [ ] T013 [US1] 單元測試 FogMask 行為於 tests/features/fogmask/FogMask.test.tsx
+- [ ] T013b [US1] 單元測試 ExploreButton 行為於 tests/features/fogmask/ExploreButton.test.tsx
+- [ ] T013c [US1] 單元測試 MainMapPage 行為於 tests/features/fogmask/MainMapPage.test.tsx
+- [ ] T013d [US1] 單元測試 useFogMask 行為於 tests/features/fogmask/useFogMask.test.ts
 
 ---
+
 
 ## Phase 4: User Story 2 - 擦除迷霧並記錄探索軌跡 (P2)
 
 **Goal**: 使用者移動時，經過網格會擦除對應遮罩，並每 5-10 秒自動儲存座標與軌跡，探索區域持續擴大
-**Independent Test**: 使用者移動時遮罩被擦除，資料庫正確記錄軌跡與探索狀態
+**Independent Test**: 使用者移動時遮罩被擦除，資料庫正確記錄軌跡與探索狀態，查詢延遲 <50ms
 
 - [ ] T014 [P] [US2] 擦除遮罩演算法於 src/features/fogmask/utils/eraseFog.ts
 - [ ] T015 [P] [US2] 軌跡記錄 hook 於 src/features/fogmask/hooks/useTrackRecorder.ts
@@ -52,10 +56,11 @@ description: "Task list for 002-fog-mask: 迷霧遮罩渲染與探索"
 
 ---
 
+
 ## Phase 5: User Story 3 - 顯示統計資訊與異常處理 (P3)
 
 **Goal**: 即時顯示已探索面積、百分比、等級，定位失敗或未授權時全遮罩並彈出提示
-**Independent Test**: 統計資訊即時更新，異常時全遮罩與提示正確顯示
+**Independent Test**: 統計資訊即時更新，異常時全遮罩與提示正確顯示，異常處理 100% 覆蓋
 
 - [ ] T018 [P] [US3] 統計資訊元件於 src/features/fogmask/components/Statistics.tsx
 - [ ] T019 [US3] 狀態欄異常處理邏輯於 src/features/fogmask/hooks/useErrorHandler.ts
@@ -64,13 +69,17 @@ description: "Task list for 002-fog-mask: 迷霧遮罩渲染與探索"
 
 ---
 
+
 ## Phase N: Polish & Cross-Cutting Concerns
 
 - [ ] T022 [P] 文件補充與 API 合約同步於 docs/002-fog-mask/
-- [ ] T023 代碼重構與效能優化
-- [ ] T024 [P] 補充單元測試於 tests/features/fogmask/
-- [ ] T025 安全性強化與權限驗證
+- [ ] T023 代碼重構與效能優化（細化：針對地圖互動效能 <100ms、60fps，優化渲染與狀態管理）
+- [ ] T024 [P] 補充單元測試於 tests/features/fogmask/（補齊所有元件：ExploreButton, MainMapPage, useFogMask, useTrackRecorder, useErrorHandler 等）
+- [ ] T025 安全性強化與權限驗證（明確驗收：權限異常時 100% 彈出提示並禁止探索）
 - [ ] T026 執行 quickstart.md 驗證
+- [ ] T027 [P] SQLite 索引查詢效能優化與測試於 src/features/fogmask/services/storage.ts、tests/features/fogmask/Storage.test.ts
+- [ ] T028 [P] 跨平台（Android/iOS）效能與相容性測試，確保 95% 以上裝置不卡頓、顯示正常
+- [ ] T029 [P] 地圖資料載入失敗處理與測試於 src/features/fogmask/hooks/useErrorHandler.ts、tests/features/fogmask/ErrorHandler.test.ts
 
 ---
 
