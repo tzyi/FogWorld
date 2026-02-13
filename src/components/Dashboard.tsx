@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, PermissionsAndroid, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Region } from 'react-native-maps';
 import { LocateFixed } from 'lucide-react-native';
-import Geolocation from 'react-native-geolocation-service';
+import * as Location from 'expo-location';
 
 const Dashboard: React.FC = () => {
   const [isExploring, setIsExploring] = useState(false);
@@ -17,41 +17,34 @@ const Dashboard: React.FC = () => {
   const [locating, setLocating] = useState(false);
   const [locateError, setLocateError] = useState<string | null>(null);
 
-  // 權限請求
-  const requestLocationPermission = async () => {
-    if (Platform.OS === 'android') {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-      );
-      return granted === PermissionsAndroid.RESULTS.GRANTED;
-    }
-    return true;
-  };
-
   const handleLocate = async () => {
-    setLocating(true);
-    setLocateError(null);
-    const hasPermission = await requestLocationPermission();
-    if (!hasPermission) {
-      Alert.alert('定位失敗', '未取得定位權限', [{ text: '確定' }]);
+    try {
+      setLocating(true);
+      setLocateError(null);
+      
+      // 請求定位權限
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('定位失敗', '未取得定位權限', [{ text: '確定' }]);
+        setLocating(false);
+        return;
+      }
+
+      // 取得目前位置
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      });
+
+      setRegion((prev) => ({
+        ...prev,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      }));
       setLocating(false);
-      return;
+    } catch (error) {
+      Alert.alert('定位失敗', '無法取得定位，請確認 GPS 已開啟', [{ text: '確定' }]);
+      setLocating(false);
     }
-    Geolocation.getCurrentPosition(
-      (pos) => {
-        setRegion((prev) => ({
-          ...prev,
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
-        }));
-        setLocating(false);
-      },
-      (err) => {
-        Alert.alert('定位失敗', '定位失敗，請確認權限已開啟', [{ text: '確定' }]);
-        setLocating(false);
-      },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
-    );
   };
 
   return (
